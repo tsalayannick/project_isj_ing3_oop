@@ -49,7 +49,7 @@ python src/main.py
 
 ---
 
-##  Workflow de soumission
+## Workflow de soumission
 
 ### 1. Forker le dépôt
 
@@ -97,25 +97,25 @@ dépôt officiel `st9-8/project_isj_ing3_oop`.
 
 ## Modules fonctionnels
 
-| Module | Description |
-|--------|-------------|
-| 1 — Modélisation | Équipements réseau, topologie, liens |
-| 2 — Trafic | Paquets, routage saut par saut, statistiques |
-| 3 — Sécurité | Firewall, règles de filtrage, journal horodaté |
-| 4 — Surveillance | Moniteur réseau, métriques, export rapport |
-| 5 — Interface | Menu console interactif |
+| Module           | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| 1 — Modélisation | Équipements réseau, topologie, liens           |
+| 2 — Trafic       | Paquets, routage saut par saut, statistiques   |
+| 3 — Sécurité     | Firewall, règles de filtrage, journal horodaté |
+| 4 — Surveillance | Moniteur réseau, métriques, export rapport     |
+| 5 — Interface    | Menu console interactif                        |
 
 ---
 
 ## Groupes
 
-| Branche | Groupe | Membres |
-|---------|--------|---------|
-| `group_1` | — | — |
-| `group_2` | — | — |
-| `group_3` | — | — |
-| `group_4` | — | — |
-| `group_5` | — | — |
+| Branche   | Groupe | Membres |
+| --------- | ------ | ------- |
+| `group_1` | —      | —       |
+| `group_2` | —      | —       |
+| `group_3` | —      | —       |
+| `group_4` | —      | —       |
+| `group_5` | —      | —       |
 
 > Ce tableau sera mis à jour par l'examinateur au démarrage du projet.
 
@@ -123,18 +123,18 @@ dépôt officiel `st9-8/project_isj_ing3_oop`.
 
 ## Évaluation
 
-| Critère | Points |
-|---------|--------|
-| Fonctionnement du simulateur | 6 |
-| Qualité de la modélisation POO | 5 |
-| Couverture des concepts du cours | 4 |
-| Rapport technique | 3 |
-| Soutenance et maîtrise individuelle | 2 |
-| **Total** | **20** |
+| Critère                             | Points |
+| ----------------------------------- | ------ |
+| Fonctionnement du simulateur        | 6      |
+| Qualité de la modélisation POO      | 5      |
+| Couverture des concepts du cours    | 4      |
+| Rapport technique                   | 3      |
+| Soutenance et maîtrise individuelle | 2      |
+| **Total**                           | **20** |
 
 ---
 
-##  Examinateur
+## Examinateur
 
 **M. Stephane Fedim**  
 Institut Saint Jean - Parcours Ingénieur
