@@ -10,12 +10,15 @@ class MoniteurReseau:
   
     def paquet_perdu(self):
         self.paquets_perdus += 1
+    def ajouter_paquet(self, paquet):
+        self.historique.append(paquet)
+        if len(self.historique) > 10:
+            self.historique.pop(0)
 
 moniteur = MoniteurReseau()
 
-moniteur.paquet_transmis()
-moniteur.paquet_transmis()
-moniteur.paquet_perdu()
+moniteur.ajouter_paquet("paquet 1")
+moniteur.ajouter_paquet("paquet 2")
+moniteur.ajouter_paquet("paquet 3")
 
-print(moniteur.paquets_transmis)
-print(moniteur.paquets_perdus)
+print(moniteur.historique)
