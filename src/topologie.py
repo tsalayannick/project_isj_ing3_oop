@@ -7,6 +7,6 @@ class Lien:
         self.latence = latence                # en ms
 
     def afficher(self):
-        print(f"Lien : {self.equipement_a.nom} <---> {self.equipement_b.nom} "
+        print(f"Lien : {self.equipement_a.nom} -----> {self.equipement_b.nom} "
               f"| Bande passante : {self.bande_passante} Mbps "
               f"| Latence : {self.latence} ms")

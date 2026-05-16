@@ -20,7 +20,7 @@ class Equipement:
         self.nom = nom
         self.adresse_ip = adresse_ip
         self.marque = marque
-        self.statut = statut  # True = actif, False = inactif
+        self.statut = statut
 
     def activer(self):
         self.statut = True
