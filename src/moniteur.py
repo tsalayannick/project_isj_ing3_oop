@@ -37,12 +37,46 @@ class MoniteurReseau:
         self.equipements_inactifs = [e for e in liste_equipements if e.statut == "inactif"]
 
     def afficher_statistiques(self):
-        print("STATISTIQUES RÉSEAU ")
+        print("=== STATISTIQUES RÉSEAU ===")
         print("Paquets transmis (total) :", self.paquets_transmis)
         print("Paquets perdus (total)   :", self.paquets_perdus)
         print("Historique               :", len(self.historique), "paquet(s)")
-        print("\n Stats par équipement ")
+        print("\n--- Stats par équipement ---")
         for nom, stats in self.stats_equipements.items():
             print(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}")
         print("\nÉquipements actifs   :", len(self.equipements_actifs))
         print("Équipements inactifs :", len(self.equipements_inactifs))
+
+    def generer_rapport(self):
+        maintenant = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with open("rapport_simnet.txt", "w", encoding="utf-8") as fichier:
+
+            fichier.write("=== RAPPORT SIMNET ===\n")
+            fichier.write(f"Généré le : {maintenant}\n\n")
+
+            fichier.write("--- Paquets transmis / perdus par équipement ---\n")
+            for nom, stats in self.stats_equipements.items():
+                fichier.write(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}\n")
+            fichier.write(f"\n  TOTAL transmis : {self.paquets_transmis}\n")
+            fichier.write(f"  TOTAL perdus   : {self.paquets_perdus}\n")
+
+            fichier.write("\n--- Taux d'utilisation des liens ---\n")
+            if self.stats_liens:
+                for lien, octets in self.stats_liens.items():
+                    fichier.write(f"  {lien} : {octets} octets\n")
+            else:
+                fichier.write("  Aucun lien enregistré.\n")
+
+            fichier.write("\n--- Historique des 10 derniers paquets ---\n")
+            if self.historique:
+                for i, paquet in enumerate(self.historique, 1):
+                    fichier.write(f"  {i}. {paquet}\n")
+            else:
+                fichier.write("  Aucun paquet dans l'historique.\n")
+
+            fichier.write("\n--- Équipements ---\n")
+            fichier.write(f"  Actifs   : {len(self.equipements_actifs)}\n")
+            fichier.write(f"  Inactifs : {len(self.equipements_inactifs)}\n")
+
+        print("Rapport généré avec succès → rapport_simnet.txt")
