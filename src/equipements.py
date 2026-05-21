@@ -9,6 +9,20 @@ def valider_ipv4(ip):
         if not (0 <= int(partie) <= 255):
             return False
     return True
+def saisir_ip(equipements_existants=None):
+    while True:
+        ip = input("Adresse IP : ")
+        if not valider_ipv4(ip):
+            print("Erreur : IP invalide. Exemple correct : 192.168.1.1")
+            continue
+        if equipements_existants is not None:
+            ip_existante = []
+            for eq in equipements_existants:
+                ip_existante.append(eq.adresse_ip)
+        if ip in ip_existante:
+            print(f"ERREUR : l'adresse {ip} est déja utilisee.")
+            continue
+        return ip
 
 
 # Classe mère (abstraite) de tous les équipements
