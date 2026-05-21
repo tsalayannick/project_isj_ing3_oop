@@ -15,7 +15,8 @@ def valider_ipv4(ip):
 class Equipement:
     def __init__(self, nom, adresse_ip, marque, statut=True):
         if not valider_ipv4(adresse_ip):
-            print(f"Erreur : adresse IP invalide -> {adresse_ip}")
+            raise ValueError(f"Adresse IP invalide : {adresse_ip}")
+
             return
         self.nom = nom
         self.adresse_ip = adresse_ip

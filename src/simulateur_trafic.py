@@ -3,7 +3,7 @@
 from statistiques import Statistiques
 
 
-class SimulateurTrafic:
+class Simulateur:
     # on utilise Dijkstra pour trouver le chemin le plus rapide (latence minimale)
 
     def __init__(self, topologie):
