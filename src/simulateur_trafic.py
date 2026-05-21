@@ -15,24 +15,21 @@ class SimulateurTrafic:
         graphe = {}
 
         for lien in self.topologie.liens:
-            eq_a = self.topologie.obtenir_equipement(lien.equipement_a)
-            eq_b = self.topologie.obtenir_equipement(lien.equipement_b)
-
-            if eq_a is None or eq_b is None:
-                continue
+            eq_a = lien.equipement_a
+            eq_b = lien.equipement_b
 
             # on ignore les equipements eteints
-            if eq_a.actif == False or eq_b.actif == False:
+            if eq_a.statut == False or eq_b.statut == False:
                 continue
 
-            if lien.equipement_a not in graphe:
-                graphe[lien.equipement_a] = []
-            if lien.equipement_b not in graphe:
-                graphe[lien.equipement_b] = []
+            if eq_a.nom not in graphe:
+                graphe[eq_a.nom] = []
+            if eq_b.nom not in graphe:
+                graphe[eq_b.nom] = []
 
             # lien dans les deux sens
-            graphe[lien.equipement_a].append((lien.latence, lien.equipement_b, lien))
-            graphe[lien.equipement_b].append((lien.latence, lien.equipement_a, lien))
+            graphe[eq_a.nom].append((lien.latence, eq_b.nom, lien))
+            graphe[eq_b.nom].append((lien.latence, eq_a.nom, lien))
 
         return graphe
 
@@ -137,7 +134,7 @@ class SimulateurTrafic:
         # parcours saut par saut
         numero_saut = 0
         for nom_equipement in chemin:
-            eq = self.topologie.obtenir_equipement(nom_equipement)
+            eq = self.topologie.trouver_equipement(nom_equipement)
 
             if afficher_details:
                 if numero_saut == 0:
@@ -181,10 +178,10 @@ class SimulateurTrafic:
         return True
 
     def _trouver_par_ip(self, adresse_ip):
-        # cherche un equipement par son adresse IP
-        for nom, equipement in self.topologie.equipements.items():
-            if equipement.adresse_ip == adresse_ip:
-                return equipement
+        # cherche un equipement dans la liste par son adresse IP
+        for eq in self.topologie.equipements:
+            if eq.adresse_ip == adresse_ip:
+                return eq
         return None
 
     def afficher_statistiques(self):
