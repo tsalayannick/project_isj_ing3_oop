@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class equipement:
     def __init__(self, nom, ip_adresse):
         self.nom = nom
@@ -245,7 +244,7 @@ class RegleFiltrage:
                 f"Firewall (nom={self.nom!r}, adresse_ip={self.adresse_ip!r}, "f"nb_regles={len(self.regles)!r})"
             )
         
-        
+
 
 
 
