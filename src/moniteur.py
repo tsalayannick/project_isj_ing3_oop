@@ -1,7 +1,10 @@
 import datetime
 import collections
+from topologie import Topologie
+from statistiques import Statistiques
 
 class MoniteurReseau:
+    """Surveille l'activité du réseau et génère des rapports d'exploitation."""
 
     def __init__(self):
         self.paquets_transmis = 0
@@ -11,6 +14,7 @@ class MoniteurReseau:
         self.stats_liens = {}
         self.equipements_actifs = []
         self.equipements_inactifs = []
+        self.statistiques = Statistiques()
 
     def paquet_transmis(self, nom_equipement):
         self.paquets_transmis += 1
@@ -32,9 +36,15 @@ class MoniteurReseau:
             self.stats_liens[nom_lien] = 0
         self.stats_liens[nom_lien] += octets
 
-    def mettre_a_jour_equipements(self, liste_equipements):
-        self.equipements_actifs = [e for e in liste_equipements if e.statut == "actif"]
-        self.equipements_inactifs = [e for e in liste_equipements if e.statut == "inactif"]
+    def enregistrer_liens_topologie(self, topologie):
+        for lien in topologie.liens:
+            nom_lien = f"{lien.equipement_a.nom}-{lien.equipement_b.nom}"
+            if nom_lien not in self.stats_liens:
+                self.stats_liens[nom_lien] = 0
+
+    def mettre_a_jour_equipements(self, topologie):
+        self.equipements_actifs = [e for e in topologie.equipements if e.statut == "actif"]
+        self.equipements_inactifs = [e for e in topologie.equipements if e.statut == "inactif"]
 
     def afficher_statistiques(self):
         print("=== STATISTIQUES RÉSEAU ===")
@@ -42,10 +52,15 @@ class MoniteurReseau:
         print("Paquets perdus (total)   :", self.paquets_perdus)
         print("Historique               :", len(self.historique), "paquet(s)")
         print("\n--- Stats par équipement ---")
-        for nom, stats in self.stats_equipements.items():
-            print(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}")
+        if self.stats_equipements:
+            for nom, stats in self.stats_equipements.items():
+                print(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}")
+        else:
+            print("  Aucune statistique disponible.")
         print("\nÉquipements actifs   :", len(self.equipements_actifs))
         print("Équipements inactifs :", len(self.equipements_inactifs))
+        print()
+        self.statistiques.afficher()
 
     def generer_rapport(self):
         maintenant = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -55,11 +70,14 @@ class MoniteurReseau:
             fichier.write("=== RAPPORT SIMNET ===\n")
             fichier.write(f"Généré le : {maintenant}\n\n")
 
-            fichier.write("--- Paquets transmis / perdus par équipement ---\n")
-            for nom, stats in self.stats_equipements.items():
-                fichier.write(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}\n")
-            fichier.write(f"\n  TOTAL transmis : {self.paquets_transmis}\n")
-            fichier.write(f"  TOTAL perdus   : {self.paquets_perdus}\n")
+            fichier.write(self.statistiques.vers_texte())
+
+            fichier.write("\n--- Paquets par équipement ---\n")
+            if self.stats_equipements:
+                for nom, stats in self.stats_equipements.items():
+                    fichier.write(f"  {nom} → transmis: {stats['transmis']}, perdus: {stats['perdus']}\n")
+            else:
+                fichier.write("  Aucune statistique disponible.\n")
 
             fichier.write("\n--- Taux d'utilisation des liens ---\n")
             if self.stats_liens:
