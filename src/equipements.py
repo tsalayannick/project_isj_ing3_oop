@@ -17,7 +17,7 @@ class Equipement:
         if not valider_ipv4(adresse_ip):
             raise ValueError(f"Adresse IP invalide : {adresse_ip}")
 
-            return
+
         self.nom = nom
         self.adresse_ip = adresse_ip
         self.marque = marque
