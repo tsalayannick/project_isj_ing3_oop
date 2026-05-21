@@ -19,11 +19,10 @@ def saisir_ip(equipements_existants=None):
             ip_existante = []
             for eq in equipements_existants:
                 ip_existante.append(eq.adresse_ip)
-        if ip in ip_existante:
-            print(f"ERREUR : l'adresse {ip} est déja utilisee.")
-            continue
+            if ip in ip_existante:
+                print(f"Erreur : l'adresse {ip} est deja utilisee.")
+                continue
         return ip
-
 
 # Classe mère (abstraite) de tous les équipements
 class Equipement:
