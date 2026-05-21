@@ -1,6 +1,6 @@
 # main.py — Interface console de SIMNet
 
-from equipements import Routeur, Switch, Serveur, Firewall, PointAccesWifi, Terminal, saisir_ip
+from equipements import Routeur, Switch, Serveur, Firewall, PointAccesWifi, Terminal, saisir_ip,valider_ipv4
 from topologie import Topologie
 from paquet import Paquet
 from simulateur_trafic import SimulateurTrafic
@@ -13,16 +13,11 @@ moniteur = MoniteurReseau()
 
 while True:
     print("\n===== SIMNet =====")
-    print("1. Ajouter un equipement")
-    print("2. Supprimer un equipement")
-    print("3. Ajouter un lien")
-    print("4. Supprimer un lien")
-    print("5. Afficher la topologie")
-    print("6. Envoyer un paquet")
-    print("7. Journal du Firewall")
-    print("8. Statistiques")
-    print("9. Historique des paquets")
-    print("10. Generer un rapport")
+    print("1. Ajouter un equipement          |        2. Supprimer un equipement")
+    print("3. Ajouter un lien                |        4. Supprimer un lien")
+    print("5. Afficher la topologie          |        6. Envoyer un paquet")
+    print("7. Journal du Firewall            |        8. Statistiques")
+    print("9. Historique des paquets         |        10. Generer un rapport")
     print("0. Quitter")
 
     choix = input("Choix : ")
@@ -163,8 +158,8 @@ while True:
                 print("Equipements disponibles :")
                 for eq in topologie.equipements:
                     print(f"  - {eq.nom} ({eq.adresse_ip})")
-                src = saisir_ip()
-                dst = saisir_ip()
+                src = valider_ipv4()
+                dst = valider_ipv4()
                 if src == dst:
                     print("Erreur : la source et la destination ne peuvent pas etre identiques.")
                 else:
