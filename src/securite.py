@@ -115,3 +115,20 @@ class GestionnaireFirewall:
     def vider_journal(self):
         self.firewall.journal.clear()
         print(f"Journal du firewall {self.firewall.nom} vidé.")
+
+    def inspecter(self, paquet, nom_equipement):
+        heure = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        for regle in self.firewall.regles:
+            if regle.correspond(paquet):
+                decision = regle.action
+                raison   = f"[{decision}] sur {nom_equipement}"
+                entree   = f"[{heure}] {raison} | {paquet}"                  
+                self.firewall.journal.append(entree)
+            if decision == "BLOCK":
+                return False, raison
+            else:
+                return True, raison
+        raison = f"ALLOW par defaut sur {nom_equipement}"
+        entree = f"[{heure}] {raison} | {paquet}"
+        self.firewall.journal.append(entree)
+        return True, raison
