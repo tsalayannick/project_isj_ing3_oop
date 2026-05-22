@@ -125,4 +125,4 @@ class Terminal(Equipement):
 
     def afficher(self):
         super().afficher()
-        print(f"  Type : terminal client")
+        print("  Type : terminal client")

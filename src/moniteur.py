@@ -1,6 +1,6 @@
 import datetime
 import collections
-from topologie import Topologie
+
 from statistiques import Statistiques
 
 class MoniteurReseau:

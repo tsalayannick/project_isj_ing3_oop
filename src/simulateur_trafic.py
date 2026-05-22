@@ -170,7 +170,7 @@ class SimulateurTrafic:
             debit_final = debit_calcule
 
         if afficher_details:
-            print(f"  Resultat : LIVRE !")
+            print("Resultat : LIVRE !")
             print(f"  Latence  : {latence_totale:.2f} ms")
             print(f"  Debit    : {debit_final:.2f} Mbps")
 
