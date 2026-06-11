@@ -1,0 +1,23 @@
+=== RAPPORT SIMNET ===
+Généré le : 2026-06-10 20:44:52
+
+STATISTIQUES DU RESEAU
+  Paquets envoyes : 0
+  Paquets livres : 0
+  Paquets perdus : 0
+  Taux de perte : 0.0 %
+  Debit cumule : 0.00 Mbps
+  Transit moyen : 0.00 ms
+
+--- Paquets par équipement ---
+  Aucune statistique disponible.
+
+--- Taux d'utilisation des liens ---
+  Aucun lien enregistré.
+
+--- Historique des 10 derniers paquets ---
+  Aucun paquet dans l'historique.
+
+--- Équipements ---
+  Actifs   : 0
+  Inactifs : 0
